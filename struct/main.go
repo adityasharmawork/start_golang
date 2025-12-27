@@ -16,7 +16,7 @@ type Contact struct {
 type Address struct {
 	House int
 	Area string
-	state string
+	State string
 }
 
 type Employee struct {
@@ -50,11 +50,29 @@ func main() {
 	// fmt.Println(person2)
 
 
-	employee1 := Employee{
-		Person_Details: Person{
-			FirstName: "Aditya",
-			LastName: "Sharma",
-			Age: 20,
-		},
+	var employee1 Employee
+	employee1.Person_Details = Person{
+		FirstName: "Aditya",
+		LastName: "Sharma",
+		Age: 20,
 	}
+
+	employee1.Contact_Details.Email = "aditya@gmail.com"
+	employee1.Contact_Details.Phone = "1234567890"
+
+	employee1.Address_Details = Address{
+		House: 123,
+		Area: "Dhanbad",
+		State: "Jharkhand",
+	}
+
+	fmt.Println("Employee 1:", employee1)
+
+	// employee1 := Employee{
+	// 	Person_Details: Person{
+	// 		FirstName: "Aditya",
+	// 		LastName: "Sharma",
+	// 		Age: 20,
+	// 	},
+	// }
 }
