@@ -13,9 +13,11 @@ type Todo struct {
 	Completed bool   `json:"completed"`
 }
 
-func main() {
-	fmt.Println("Learning CRUD Operations in Go lang")
 
+
+
+
+func performGetRequest() {
 	res, err := http.Get("https://jsonplaceholder.typicode.com/todos/1")
 	if err != nil {
 		fmt.Println("Error getting response:", err)
@@ -60,7 +62,7 @@ func main() {
 	// OR - 
 
 
-	
+
 	var todo Todo
 	err = json.NewDecoder(res.Body).Decode(&todo)
 	if err != nil {
@@ -69,5 +71,16 @@ func main() {
 	}
 
 	fmt.Println("Todo:", todo)
+}
 
+
+
+
+
+
+
+
+func main() {
+	fmt.Println("Learning CRUD Operations in Go lang")
+	// performGetRequest()
 }
