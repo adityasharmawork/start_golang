@@ -162,9 +162,45 @@ func performUpdateRequest() {
 
 }
 
+func performDeleteRequest() {
+	myURL := "https://jsonplaceholder.typicode.com/todos/1"
+
+	// Create DELETE Request
+
+	req, err := http.NewRequest(http.MethodDelete, myURL, nil)
+	if err != nil {
+		fmt.Println("Error while creating request:", err)
+		return
+	}
+
+	// Send the DELETE Request
+	// For this, we will need to create a Client which will send the Request
+
+	client := http.Client{}
+	res, err := client.Do(req)
+	if err != nil {
+		fmt.Println("Error while sending the DELETE Request from the Client:", err)
+		return
+	}
+
+	defer res.Body.Close()
+
+	data, err := ioutil.ReadAll(res.Body)
+	if err != nil {
+		fmt.Println("Error reading the Data:", err)
+		return
+	}
+
+	fmt.Println("Response Status:", res.Status)
+	fmt.Println("Response:", string(data))
+
+	
+}
+
 func main() {
 	fmt.Println("Learning CRUD Operations in Go lang")
 	// performGetRequest()
 	// performPostRequest()
-	performUpdateRequest()
+	// performUpdateRequest()
+	performDeleteRequest()
 }
