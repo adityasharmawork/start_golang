@@ -107,8 +107,64 @@ func performPostRequest() {
 
 }
 
+func performUpdateRequest() {	
+	todo := Todo{
+		UserID:    23789,
+		Title:     "Aditya Sharma Go lang Hello World",
+		Completed: true,
+	}
+
+	// Convert the Todo Struct to JSON Encoding (Marshal)
+	jsonData, err := json.Marshal(todo)
+	if err != nil {
+		fmt.Println("Error while Marshalling Data:", err)
+		return
+	}
+
+
+	// Create PUT Request
+	// As there is no http.Put() method, we will use http.NewRequest()
+
+	jsonString := string(jsonData)
+	jsonReader := strings.NewReader(jsonString)
+
+	const myURL = "https://jsonplaceholder.typicode.com/todos/1"
+
+
+	req, err := http.NewRequest(http.MethodPut, myURL, jsonReader)
+	if err != nil {
+		fmt.Println("Error while creating request:", err)
+		return
+	}
+
+	req.Header.Set("Content-Type", "application/json")
+
+	// Send the PUT Request
+	// For this, we will need to create a Client which will send the Request
+
+	client := http.Client{}
+	res, err := client.Do(req)
+	if err != nil {
+		fmt.Println("Error while sending the PUT Request from the Client:", err)
+		return
+	}
+
+	defer res.Body.Close()
+
+	data, err := ioutil.ReadAll(res.Body)
+	if err != nil {
+		fmt.Println("Error reading the Data:", err)
+		return
+	}
+
+	fmt.Println("Response Status:", res.Status)
+	fmt.Println("Response:", string(data))
+
+}
+
 func main() {
 	fmt.Println("Learning CRUD Operations in Go lang")
 	// performGetRequest()
-	performPostRequest()
+	// performPostRequest()
+	performUpdateRequest()
 }
